@@ -1,9 +1,7 @@
     import React, { useEffect, useState } from "react";
     import { Link } from 'react-router-dom';
     import { FiArrowLeft } from 'react-icons/fi';
-    //import { MapContainer, TileLayer, Marker, } from 'react-leaflet';
-    //import api from '../../services/api';
-
+    import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
     import './styles.css';
     import logo from '../../assetes/logo.svg';
     import api from "../../services/api";
@@ -14,8 +12,8 @@
         useEffect(() => {
             api.get('items').then(response => {
                 console.log(response);
-            });
-        }); 
+            })
+        }, [])
         return (
             <div id="page-create-point">
                 <header>
@@ -60,7 +58,8 @@
                         </div>
                         </div>
                     </fieldset>
-                    
+
+
                     <fieldset>
                         <legend>
                             <h2>Endereço</h2>
@@ -83,6 +82,18 @@
                         </div>
                     </fieldset>
 
+                    <MapContainer center={[ -21.599746, -48.8370901 ]} zoom={13} scrollWheelZoom={false}>
+                        <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                        <Marker position={[ -21.599746, -48.8370901 ]}>
+                            <Popup>
+                                A pretty CSS3 popup. <br /> Easily customizable.
+                            </Popup>
+                        </Marker>
+                    </MapContainer>
+                    
                     <fieldset>
                         <legend>
                             <h2>Ítens de Coleta</h2>
